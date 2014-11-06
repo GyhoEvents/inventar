@@ -4,19 +4,14 @@
  * and open the template in the editor.
  */
 
-package gyhoinventar;
+package de.gyhoevents.inventar.listeners.network;
 
 /**
  *
  * @author Programmieren
  */
-public class GyHoInventar {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        Core c =  new Core(); 
-    }
-    
+public interface NetworkListener {
+    public void bearbeiteVerbindungsaufbau();
+    public void bearbeiteNachricht(String pNachricht);
+    public void bearbeiteVerbindungsende();
 }

@@ -4,33 +4,40 @@
  * and open the template in the editor.
  */
 
-package gyhoinventar;
+package de.gyhoevents.inventar.gui.controllers;
 
-import gyhoinventar.listeners.network.NetworkListener;
-import gyhoinventar.network.GyHoInventarClient;
+import de.gyhoevents.inventar.gui.LoginGui;
+import de.gyhoevents.inventar.listeners.network.NetworkListener;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Programmieren
  */
-public class Core implements NetworkListener{
-    private GyHoInventarClient verbindung;
-    
-    public Core(){
-        verbindung = new GyHoInventarClient("localhost", 12345);
-        verbindung.addListener(this);
+public class GeneralController implements NetworkListener{
+   
+   
+
+    public GeneralController() {
+ 
     }
+    
 
     @Override
     public void bearbeiteVerbindungsaufbau() {
        // Starte Login 
-        
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new LoginGui().setVisible(true);;
+            }
+        });
+
     }
 
     @Override
     public void bearbeiteNachricht(String pNachricht) {
-       
+
     }
 
     @Override
