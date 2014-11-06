@@ -4,10 +4,10 @@
  * and open the template in the editor.
  */
 
-package gyhoinventar;
+package de.gyhoevents.inventar;
 
-import gyhoinventar.listeners.network.NetworkListener;
-import gyhoinventar.network.GyHoInventarClient;
+import de.gyhoevents.inventar.listeners.network.NetworkListener;
+import de.gyhoevents.inventar.network.GyHoInventarClient;
 import javax.swing.JOptionPane;
 
 /**

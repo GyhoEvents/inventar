@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package gyhoinventar.gui;
+package de.gyhoevents.inventar.gui;
 
 /**
  *

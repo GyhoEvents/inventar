@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 
-package gyhoinventar.network;
+package de.gyhoevents.inventar.network;
 
-import gyhoinventar.listeners.network.NetworkListener;
+import de.gyhoevents.inventar.listeners.network.NetworkListener;
 import java.util.ArrayList;
 import java.util.List;
 import me.Niklas.Client.SichererClient;
