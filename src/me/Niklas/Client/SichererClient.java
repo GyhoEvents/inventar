@@ -6,8 +6,11 @@
 
 package me.Niklas.Client;
 
+import de.gyhoevents.inventar.listeners.network.NetworkListener;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,29 +21,54 @@ import java.util.logging.Logger;
 public class SichererClient {
     
     private Socket client;
+    private List<NetworkListener> listeners;
     public  MessageLoop ml;
     
     
-    public SichererClient(String pAdresse, int pPort) {
+    public SichererClient(String pAdresse, int pPort, NetworkListener nl) {
+        listeners = new ArrayList<>();
+        listeners.add(nl);
+        
         try {
             client = new Socket(pAdresse,pPort);
             ml = new MessageLoop(client,this);
-            
+            ml.start();
         } catch (IOException ex) {
-            Logger.getLogger(SichererClient.class.getName()).log(Level.SEVERE, null, ex);
+            bearbeiteVerbindungsende();
         }
-        ml.start();
-        
     }
-    protected void bearbeiteNachricht( String pNachricht){
-        
-    }
+  
     
-    protected void bearbeiteVerbindungsaufbau(){
-        
+    public void bearbeiteNachricht(String pNachricht) {
+       // System.out.println("Empfangen: " + pNachricht);
+        for (int i = 0, size = listeners.size(); i < size; i++) {
+            listeners.get(i).bearbeiteNachricht(pNachricht);
+        }
+
     }
+
     
-    protected void bearbeiteVerbindungsende() {}
+    public void bearbeiteVerbindungsende() {
+        
+        for (int i = 0, size = listeners.size(); i < size; i++) {
+            listeners.get(i).bearbeiteVerbindungsende();
+        }
+    }
+
+    
+    public void bearbeiteVerbindungsaufbau() {
+
+        for (int i = 0, size = listeners.size(); i < size; i++) {
+            listeners.get(i).bearbeiteVerbindungsaufbau();
+        }
+    }
+
+    public void addListener(NetworkListener listener) {
+        listeners.add(listener);
+    }
+    public void removeListener(NetworkListener listener){
+        listeners.remove(listener);
+    }
   
     
     public void beendeVerbindung(){
